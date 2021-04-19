@@ -16,7 +16,7 @@ void count_shells(int* num_shells)
     params.close();
 }
 
-void initialize_arrays(std::string* names, double* mass, double* r, double* v, double* a)
+void initialize_arrays(std::string* names, double* mass, double* r, double* v)
 {
     //Fill the data arrays with initial values from params.txt
     int index=0,c_index_in=0,c_index_out=0;
@@ -39,18 +39,10 @@ void initialize_arrays(std::string* names, double* mass, double* r, double* v, d
             r[index] = stod(line.substr(c_index_in,c_index_out));
             c_index_out+=1;
             c_index_in=c_index_out;
-            while(line[c_index_out]!=','){c_index_out+=1;}
-            v[index] = stod(line.substr(c_index_in,c_index_out));
-            c_index_out+=1;
-            c_index_in=c_index_out;
-            a[index] = stod(line.substr(c_index_in));
+            v[index] = stod(line.substr(c_index_in));
             //move to next shell entry
             index+=1;
         }
     }
-    
-
-
-
-
+    params.close();
 }

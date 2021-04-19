@@ -1,3 +1,3 @@
-#Shell Name,Mass (Msol),Initial Radius (AU),Initial Velocity (km/s),Initial Acceleration (km/s/s)
-alpha,1.00,1.01,0,0
-beta,1.000,2.2,0.00,-0.1
+#Shell Name,Mass (Msol),Initial Radius (AU),Initial Velocity (km/s)
+alpha,1.00,10.0,0.0
+#beta,1.000,2.2,0.00

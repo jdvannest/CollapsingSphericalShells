@@ -15,6 +15,7 @@ LFLAGS= -lstdc++ #-lgfortran
 
 OBJ1 := Simulation.o
 OBJ2 := read_params.o
+OBJ3 := evolve.o
 TARGET1 := Simulation
 
 
@@ -24,7 +25,7 @@ TARGETS := $(TARGET1)
 all: $(TARGETS)
 
 
-$(TARGET1):$(OBJ1) $(OBJ2)
+$(TARGET1):$(OBJ1) $(OBJ2) $(OBJ3)
 	$(CC) $(CFLAGS) $^ -o $@
 
 
