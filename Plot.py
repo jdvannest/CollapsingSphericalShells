@@ -5,7 +5,9 @@ import matplotlib.pylab as plt
 parser = argparse.ArgumentParser(description="Generates plots from output .txt files", 
                                 usage="Plot.py -f output_filename")
 parser.add_argument("-f", "--file", help="Path to output .txt file. Including '.txt'"+
-                                        "is optional",required=True)                       
+                                        "is optional",required=True)
+parser.add_argument("-g", "--gif", help="Create a .gif of the collapsing shells "+
+                                        "(optional)",action="store_true")                      
 args = parser.parse_args()
 
 fname = args.file if args.file[-4:]=='.txt' else args.file+'.txt'
@@ -67,29 +69,36 @@ ax[1].plot(time,np.array(energy)/energy_i,c='k')
 f.savefig(f'Plots/{imagename}.png',bbox_inches='tight',pad_inches=.1)
 print(f"Images saved to Plots/{imagename}.png")
 
-#Create .gif of the shells
-os.system('mkdir tmp')
-jump,t = [int(len(time)/200) , 0]
-while(t<len(time)):
-    f,ax=plt.subplots(1,1,figsize=(5,5))
-    ax.set_xlim([-np.amax(r)-1,np.amax(r)+1])
-    ax.set_ylim([-np.amax(r)-1,np.amax(r)+1])
-    for n in np.arange(i):
-        ax.add_patch(plt.Circle((0,0),r[n][t],facecolor='None',edgecolor=colors[n],
-                    linewidth=(mass[n]/max(mass)*5),label=names[n]))
-    ax.legend(loc='upper right',prop={'size':12})
-    f.savefig(f'tmp/{imagename}.{"%05d"%(t,)}.png',bbox_inches='tight',pad_inches=.1)
-    plt.close()
-    t+=jump
+if args.gif:
+    def myprint(string,clear=False):
+        if clear:
+            sys.stdout.write("\033[F")
+            sys.stdout.write("\033[K") 
+        print(string)
+    print("Compiling gif...")
+    #Create .gif of the shells
+    os.system('mkdir tmp')
+    jump,t = [int(len(time)/200) , 0]
+    while(t<len(time)):
+        f,ax=plt.subplots(1,1,figsize=(5,5))
+        ax.set_xlim([-np.amax(r)-1,np.amax(r)+1])
+        ax.set_ylim([-np.amax(r)-1,np.amax(r)+1])
+        for n in np.arange(i):
+            ax.add_patch(plt.Circle((0,0),r[n][t],facecolor='None',edgecolor=colors[n],
+                        linewidth=(mass[n]/max(mass)*5),label=names[n]))
+        ax.legend(loc='upper right',prop={'size':12})
+        f.savefig(f'tmp/{imagename}.{"%05d"%(t,)}.png',bbox_inches='tight',pad_inches=.1)
+        plt.close()
+        t+=jump
 
-#Compile images into a gif
-import imageio
-imagenames = os.listdir('tmp/')
-imagenames = np.sort(np.array(imagenames))
-images = []
-for name in imagenames:
-    images.append(imageio.imread('tmp/'+str(name)))
-imageio.mimsave(f'Plots/{imagename}.gif', images, duration=.03)
-os.system('rm -f tmp/*')
-os.system('rmdir tmp/')
-print(f"Gif saved to Plots/{imagename}.gif")
+    #Compile images into a gif
+    import imageio
+    imagenames = os.listdir('tmp/')
+    imagenames = np.sort(np.array(imagenames))
+    images = []
+    for name in imagenames:
+        images.append(imageio.imread('tmp/'+str(name)))
+    imageio.mimsave(f'Plots/{imagename}.gif', images, duration=.03)
+    os.system('rm -f tmp/*')
+    os.system('rmdir tmp/')
+    myprint(f"Gif saved to Plots/{imagename}.gif",clear=True)
