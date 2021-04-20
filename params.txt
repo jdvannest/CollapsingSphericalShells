@@ -1,14 +1,14 @@
-#Name of output file, e.g. the line
-#dir1/output1
-#would output the data into a file could dir1/output1.txt
+#Name of run. For example, entering
+#run123
+#would output the data into the file outputs/run123.txt
 
-outputs/1Shell
+TEST
 
 ------Do Not Remove This Line------
 
 #Total Integration Time (yr), dt (yr), Output time (yr)
 
-10,.00001,.001
+3,.00001,.001
 
 ------Do Not Remove This Line------
 
@@ -16,12 +16,10 @@ outputs/1Shell
 
 alpha,1,10,0
 
-#alpha,3,3,2e4
+#beta,1,8,0
 
-#beta,2,5,0
+#gamma,1,6,0
 
-#gamma,1,8,-1e2
+#delta,1,4,0
 
-#delta,1.5,2,3e4
-
-#epsilon,3,10,0
+epsilon,1,2,0

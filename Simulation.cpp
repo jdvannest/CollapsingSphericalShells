@@ -7,7 +7,7 @@ int main()
     //Determine name out output file from params.txt
     string fname;
     file_name(&fname);
-    cout<<"Writing to "<<fname<<".txt"<<endl;
+    cout<<"Performing Run: "<<fname<<endl;
 
     //Determine number of shells from params.txt
     int num_shells=0;
@@ -41,7 +41,7 @@ int main()
     
     //Open output data file and fill with initial conditions
     ofstream myfile;
-    myfile.open(fname+".txt");
+    myfile.open("outputs/"+fname+".txt");
     myfile<<"#Name"<<'\t'<<"Mass"<<'\t'<<"R"<<'\t'<<"v"<<'\t'<<"a"<<'\t'<<"Energy"<<'\t'<<"t"<<endl;
     for(int i=0;i<num_shells;i++){
         myfile<<names[i]<<'\t'<<kg_to_Msol(mass[i])<<'\t'<<m_to_AU(r[i])<<'\t'<<v[i]<<'\t'<<a[i]<<'\t'<<energy<<'\t'<<0<<endl;}
@@ -57,6 +57,6 @@ int main()
 
     //Close the output file and successfully exit the code
     myfile.close();
-    cout<<"Done: Output written to "<<fname<<".txt"<<endl;
+    cout<<"Done: Output written to outputs/"<<fname<<".txt"<<endl;
     exit(0);
 }
