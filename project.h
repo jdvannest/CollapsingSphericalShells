@@ -5,11 +5,11 @@
 #include <vector>
 #include <sstream>
 #include <string>
-#include <math.h>
 
 void count_shells(int* num_shells);
 void initialize_arrays(std::string* names, double* mass, double* r, double* v);
-void evolve(double time, double dt,const double* mass, double* r, double* v, double* a, const int num_shells);
+void initial_energy(const double* mass, const double* r, const double* v, double* energy, const int num_shells);
+void evolve(double time, double dt, const double* mass, double* r, double* v, double* a, double* energy, const int num_shells);
 void time_params(double* time, double* dt, double* output_time);
 void initial_acc(const double* mass, const double* r, double* a, const int num_shells);
 double yr_to_s(double years);
