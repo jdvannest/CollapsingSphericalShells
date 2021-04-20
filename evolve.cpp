@@ -6,7 +6,8 @@ void initial_acc(const double* mass, const double* r, double* a, const int num_s
 {
     double G = 6.67430e-11 ; //(m^3 kg^-1 s^-2)
     for(int i=0;i<num_shells;i+=1){
-        a[i] = (-G*mass[i])/(2*pow(r[i],2));
+        //a[i] = (-G*mass[i])/(2*pow(r[i],2));
+        a[i]=0;
         for(int j=0;j<num_shells;j+=1){
             if(i!=j & r[j]<r[i]){
                 a[i]+=(-G*mass[j])/(pow(r[i],2));
@@ -40,7 +41,8 @@ void evolve(double time, double dt, const double* mass, double* r, double* v, do
         }
         for(int i=0;i<num_shells;i+=1){
             if(r[i]>0){
-                a_next = (-G*mass[i])/(2*pow(r[i],2));
+                //a_next = (-G*mass[i])/(2*pow(r[i],2));
+                a_next=0;
                 for(int j=0;j<num_shells;j+=1){
                     if(i!=j & r[j]<r[i]){
                     a_next += (-G*mass[j])/(pow(r[i],2));}

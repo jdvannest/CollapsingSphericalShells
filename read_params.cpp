@@ -78,7 +78,7 @@ void count_shells(int* num_shells)
 void initialize_arrays(std::string* names, double* mass, double* r, double* v)
 {
     //Fill the data arrays with initial values from params.txt
-    int index=0,c_index_in=0,c_index_out=0;
+    int index=1,c_index_in=0,c_index_out=0;
     fstream params;
     params.open("params.txt",ios::in);
     string line;

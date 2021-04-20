@@ -13,11 +13,17 @@ int main()
     int num_shells=0;
     count_shells(&num_shells);
     cout<<"Simulating "<<num_shells<<" spherical shells."<<endl;
-    //Initialize data arrays with length=number of shells
+    //Initialize data arrays with length=number of shells + 1
+    num_shells+=1;
     string names[num_shells];
     double mass[num_shells],r[num_shells],v[num_shells],a[num_shells];
     double energy;
     //Fill the data arrays with initial values from params.txt
+    //Shell 0 is the central point mass of 10Msol
+    names[0] = "Central Mass";
+    mass[0] = 10;
+    r[0] = 0;
+    v[0] = 0;
     initialize_arrays(names,mass,r,v);
 
     // Convert to kg,m,s from Msol,AU,yr
@@ -43,7 +49,7 @@ int main()
     ofstream myfile;
     myfile.open("outputs/"+fname+".txt");
     myfile<<"#Name"<<'\t'<<"Mass"<<'\t'<<"R"<<'\t'<<"v"<<'\t'<<"a"<<'\t'<<"Energy"<<'\t'<<"t"<<endl;
-    for(int i=0;i<num_shells;i++){
+    for(int i=1;i<num_shells;i++){
         myfile<<names[i]<<'\t'<<kg_to_Msol(mass[i])<<'\t'<<m_to_AU(r[i])<<'\t'<<v[i]<<'\t'<<a[i]<<'\t'<<energy<<'\t'<<0<<endl;}
 
     //Perform integrations and output data after "output_time" has passed
@@ -51,7 +57,7 @@ int main()
         evolve(output_time,dt,mass,r,v,a,&energy,num_shells);
 
         //Update output file current integration data
-        for(int i=0;i<num_shells;i++){
+        for(int i=1;i<num_shells;i++){
             myfile<<names[i]<<'\t'<<kg_to_Msol(mass[i])<<'\t'<<m_to_AU(r[i])<<'\t'<<v[i]<<'\t'<<a[i]<<'\t'<<energy<<'\t'<<s_to_yr(t)<<endl;}
         }   
 
