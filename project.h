@@ -6,6 +6,7 @@
 #include <sstream>
 #include <string>
 
+void file_name(std::string* fname);
 void count_shells(int* num_shells);
 void initialize_arrays(std::string* names, double* mass, double* r, double* v);
 void initial_energy(const double* mass, const double* r, const double* v, double* energy, const int num_shells);

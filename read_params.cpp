@@ -2,9 +2,8 @@
 
 using namespace std;
 
-void time_params(double* time, double* dt, double* output_time)
+void file_name(std::string* fname)
 {
-    int index=0,c_index_in=0,c_index_out=0;
     fstream params;
     string line;
     params.open("params.txt",ios::in);
@@ -12,6 +11,25 @@ void time_params(double* time, double* dt, double* output_time)
     while(getline(params,line)){
         if(good){
             if(!line.empty()){
+                if(line[0]!='#'){
+                    *fname=line;
+                    good=false;
+                }
+            }
+        }
+    }
+}
+
+void time_params(double* time, double* dt, double* output_time)
+{
+    int index=0,c_index_in=0,c_index_out=0;
+    fstream params;
+    string line;
+    params.open("params.txt",ios::in);
+    int n=0;
+    while(getline(params,line)){
+        if(!line.empty()){
+            if(n==1){
                 if(line[0]!='#'){
                     c_index_out=0;
                     c_index_in=c_index_out;
@@ -24,8 +42,11 @@ void time_params(double* time, double* dt, double* output_time)
                     c_index_out+=1;
                     c_index_in=c_index_out;
                     *output_time = stod(line.substr(c_index_in));
-                    good=false;
+                    n+=1;
                 }
+            }
+            else if(line[0]=='-'){
+                n+=1;
             }
         }
     }
@@ -37,17 +58,17 @@ void count_shells(int* num_shells)
     //Determine number of shells from params.txt
     fstream params;
     string line;
-    bool good=false;
+    int n=0;
     params.open("params.txt",ios::in);
     while(getline(params,line)){
         if(!line.empty()){
-            if(good){
-                if(line[0]!='#' ){
+            if(n==2){
+                if(line[0]!='#'){
                     *num_shells+=1;
                 }
             }
             else if(line[0]=='-'){
-                good=true;
+                n+=1;
             }   
         }
     }
@@ -61,10 +82,10 @@ void initialize_arrays(std::string* names, double* mass, double* r, double* v)
     fstream params;
     params.open("params.txt",ios::in);
     string line;
-    bool good=false;
+    int n=0;
     while(getline(params,line)){
         if(!line.empty()){
-            if(good){
+            if(n==2){
                 if(line[0]!='#'){
                     c_index_out=0;
                     c_index_in=c_index_out;
@@ -86,7 +107,7 @@ void initialize_arrays(std::string* names, double* mass, double* r, double* v)
                 }
             }
             else if(line[0]=='-'){
-                good=true;
+                n+=1;
             }
         }
     }

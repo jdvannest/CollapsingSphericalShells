@@ -1,8 +1,21 @@
+import argparse,sys
 import numpy as np
 import matplotlib.pylab as plt
 
-with open('output.txt') as f:
-    L = f.readlines()
+parser = argparse.ArgumentParser(description="Generates plots from output .txt files", 
+                                usage="Plot.py -f output_filename")
+parser.add_argument("-f", "--file", help="Path to output .txt file. Including '.txt'"+
+                                        "is optional",required=True)                       
+args = parser.parse_args()
+
+fname = args.file if args.file[-4:]=='.txt' else args.file+'.txt'
+
+try:
+    with open(fname) as f:
+        L = f.readlines()
+except:
+    print("Data file not found...")
+    sys.exit()
 del L[0]
 names,mass,loop,i = [[],[],True,0]
 while loop:
@@ -34,8 +47,9 @@ else:
     cm = plt.get_cmap('viridis')
     colors = [cm(1.4*float(n)/float(i)) for n in np.arange(i)]
     
+imagename = fname.split('/')[-1].rstrip('.txt') if '/' in fname else fname.rstrip('.txt')
 
-f,ax=plt.subplots(2,1,gridspec_kw={'height_ratios':[3,1]},figsize=(8,6))
+f,ax=plt.subplots(2,1,gridspec_kw={'height_ratios':[3,1]},figsize=(10,8))
 plt.subplots_adjust(hspace=0)
 ax[0].tick_params(axis='x',length=0,labelsize=0)
 ax[0].set_ylim([0,np.amax(r)+1])
@@ -49,4 +63,8 @@ for n in np.arange(i):
     ax[0].plot(time,r[n],color=colors[n],label=names[n])
 ax[0].legend(loc='upper right',prop={'size':12})
 ax[1].plot(time,np.array(energy)/energy_i,c='k')
-plt.show()
+f.savefig(f'Plots/{imagename}.png',bbox_inches='tight',pad_inches=.1)
+print(f"Images saved to Plots/{imagename}.png")
+
+#for n in np.arange(len(time)):
+#    f,ax=plt.subplots(1,1,figsize=6,6

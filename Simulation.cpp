@@ -4,6 +4,11 @@ using namespace std;
 
 int main()
 {
+    //Determine name out output file from params.txt
+    string fname;
+    file_name(&fname);
+    cout<<"Writing to "<<fname<<".txt"<<endl;
+
     //Determine number of shells from params.txt
     int num_shells=0;
     count_shells(&num_shells);
@@ -14,6 +19,7 @@ int main()
     double energy;
     //Fill the data arrays with initial values from params.txt
     initialize_arrays(names,mass,r,v);
+
     // Convert to kg,m,s from Msol,AU,yr
     for(int i=0;i<num_shells;i++){
         mass[i] = Msol_to_kg(mass[i]);
@@ -35,7 +41,7 @@ int main()
     
     //Open output data file and fill with initial conditions
     ofstream myfile;
-    myfile.open("output.txt");
+    myfile.open(fname+".txt");
     myfile<<"#Name"<<'\t'<<"Mass"<<'\t'<<"R"<<'\t'<<"v"<<'\t'<<"a"<<'\t'<<"Energy"<<'\t'<<"t"<<endl;
     for(int i=0;i<num_shells;i++){
         myfile<<names[i]<<'\t'<<kg_to_Msol(mass[i])<<'\t'<<m_to_AU(r[i])<<'\t'<<v[i]<<'\t'<<a[i]<<'\t'<<energy<<'\t'<<0<<endl;}
@@ -51,6 +57,6 @@ int main()
 
     //Close the output file and successfully exit the code
     myfile.close();
-    cout<<"Done: Output written to output.txt"<<endl;
+    cout<<"Done: Output written to "<<fname<<".txt"<<endl;
     exit(0);
 }
