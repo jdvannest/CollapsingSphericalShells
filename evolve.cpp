@@ -2,7 +2,20 @@
 
 using namespace std;
 
-void evolve(double time, double dt, double* mass, double* r, double* v, double* a, const int num_shells)
+void initial_acc(const double* mass, const double* r, double* a, const int num_shells)
+{
+    double G = 4.30091e-3; //pc (km/s)^2 Msol^-1
+    for(int i=0;i<num_shells;i+=1){
+        a[i] = (-G*.5*mass[i])/(pow(2*r[i],2));
+        for(int j=0;j<num_shells;j+=1){
+            if(i!=j & r[j]<r[i]){
+                a[i]+=(-G*mass[j])/(pow(r[i],2));
+            }
+        }
+    }
+}
+
+void evolve(double time, double dt, const double* mass, double* r, double* v, double* a, const int num_shells)
 {
     double G = 4.30091e-3; //pc (km/s)^2 Msol^-1
     float t=0,int_a;

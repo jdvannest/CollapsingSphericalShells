@@ -15,13 +15,13 @@ int main()
     initialize_arrays(names,mass,r,v);
 
     //Determine time paramaters for integration
-    double G = 4.30091e-3; //pc (km/s)^2 Msol^-1
     double total_time,output_time,dt;
     time_params(&total_time,&dt,&output_time);
 
     //find initial accelerations from initial radii
+    initial_acc(mass,r,a,num_shells);
     for(int i=0;i<num_shells;i++){
-        a[i] = (-G*.5*mass[i])/(pow(2*r[i],2));}
+        cout<<names[i]<<'\t'<<a[i]<<endl;}
     
     //Open output data file and fill with initial conditions
     ofstream myfile;
