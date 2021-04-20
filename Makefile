@@ -19,9 +19,12 @@ OBJ3 := evolve.o
 OBJ4 := conversions.o
 TARGET1 := Simulation
 
+OBJ11 := GenerateParamFile.o
+TARGET2 := GenerateParamFile
 
 
-TARGETS := $(TARGET1) 
+
+TARGETS := $(TARGET1) $(TARGET2)
 
 all: $(TARGETS)
 
@@ -29,7 +32,8 @@ all: $(TARGETS)
 $(TARGET1):$(OBJ1) $(OBJ2) $(OBJ3) $(OBJ4)
 	$(CC) $(CFLAGS) $^ -o $@
 
-
+$(TARGET2):$(OBJ11)
+	$(CC) $(CFLAGS) $^ -o $@
 
 
 .PHONY: clean
