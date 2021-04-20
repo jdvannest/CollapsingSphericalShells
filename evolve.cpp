@@ -27,7 +27,7 @@ void evolve(double time, double dt, const double* mass, double* r, double* v, do
                 if(i!=j & r[j]<r[i]){
                 int_a += (-G*mass[j])/(pow(r[i],2));}
             }
-            v[i] = v[i]+0.5*(a[i]+int_a);
+            v[i] = v[i]+0.5*(a[i]+int_a)*dt;
             a[i] = int_a;
             if(r[i]<0){
                 r[i]=0;

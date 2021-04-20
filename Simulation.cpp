@@ -20,15 +20,13 @@ int main()
 
     //find initial accelerations from initial radii
     initial_acc(mass,r,a,num_shells);
-    for(int i=0;i<num_shells;i++){
-        cout<<names[i]<<'\t'<<a[i]<<endl;}
     
     //Open output data file and fill with initial conditions
     ofstream myfile;
     myfile.open("output.txt");
-    myfile<<"#Name"<<'\t'<<"Mass"<<'\t'<<"R"<<'\t'<<"v"<<'\t'<<"a"<<endl;
+    myfile<<"#Name"<<'\t'<<"Mass"<<'\t'<<"R"<<'\t'<<"v"<<'\t'<<"a"<<'\t'<<"t"<<endl;
     for(int i=0;i<num_shells;i++){
-        myfile<<names[i]<<'\t'<<mass[i]<<'\t'<<r[i]<<'\t'<<v[i]<<'\t'<<a[i]<<endl;}
+        myfile<<names[i]<<'\t'<<mass[i]<<'\t'<<r[i]<<'\t'<<v[i]<<'\t'<<a[i]<<'\t'<<0<<endl;}
 
     //Perform integrations and output data after "output_time" has passed
     for(int t=0;t<total_time;t+=output_time){
@@ -36,7 +34,7 @@ int main()
 
         //Update output file current integration data
         for(int i=0;i<num_shells;i++){
-            myfile<<names[i]<<'\t'<<mass[i]<<'\t'<<r[i]<<'\t'<<v[i]<<'\t'<<a[i]<<endl;}
+            myfile<<names[i]<<'\t'<<mass[i]<<'\t'<<r[i]<<'\t'<<v[i]<<'\t'<<a[i]<<'\t'<<t<<endl;}
         }   
 
     //Close the output file and successfully exit the code

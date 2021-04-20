@@ -11,7 +11,7 @@ while loop:
         i+=1 
     else:
         loop=False
-r,time,t = [[],[],0]
+r,time = [[],[]]
 for n in np.arange(i):
     r.append([])
 
@@ -20,8 +20,7 @@ for line in L:
     index = names.index(l[0])
     r[index].append(float(l[2]))
     if index==0:
-        time.append(t)
-        t+=1
+        time.append(float(l[-1]))
 
 
 f,ax=plt.subplots(1,1)
