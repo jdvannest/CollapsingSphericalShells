@@ -71,7 +71,7 @@ print(f"Images saved to Plots/{imagename}.png")
 os.system('mkdir tmp')
 jump,t = [int(len(time)/200) , 0]
 while(t<len(time)):
-    f,ax=plt.subplots(1,1,figsize=(6,6))
+    f,ax=plt.subplots(1,1,figsize=(5,5))
     ax.set_xlim([-np.amax(r)-1,np.amax(r)+1])
     ax.set_ylim([-np.amax(r)-1,np.amax(r)+1])
     for n in np.arange(i):
