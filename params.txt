@@ -2,24 +2,26 @@
 #dir1/output1
 #would output the data into a file could dir1/output1.txt
 
-outputs/5Shell
+outputs/1Shell
 
 ------Do Not Remove This Line------
 
 #Total Integration Time (yr), dt (yr), Output time (yr)
 
-2,.00001,.001
+10,.00001,.001
 
 ------Do Not Remove This Line------
 
 #Shell Name,Mass (Msol),Initial Radius (AU),Initial Velocity (km/s)
 
-alpha,3,3,2e4
+alpha,1,10,0
 
-beta,2,5,0
+#alpha,3,3,2e4
 
-gamma,1,8,-1e2
+#beta,2,5,0
 
-delta,1.5,2,3e4
+#gamma,1,8,-1e2
 
-epsilon,3,10,0
+#delta,1.5,2,3e4
+
+#epsilon,3,10,0
