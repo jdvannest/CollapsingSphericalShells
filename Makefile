@@ -34,7 +34,7 @@ $(TARGET1):$(OBJ1) $(OBJ2) $(OBJ3)
 .PHONY: clean
 
 clean:
-	\rm -f *.o *.mod *.Data.* *.png *.gif *_*/*.png $(TARGETS) *.lst
+	\rm -f *.o *.mod *.Data.* *.png *.gif *_*/*.png $(TARGETS) *.lst output.txt
 
 #
 # here's how we translate the files:

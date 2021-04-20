@@ -25,4 +25,3 @@ void evolve(double time, double dt, double* mass, double* r, double* v, double* 
         t+=dt;
     }
 }
-    

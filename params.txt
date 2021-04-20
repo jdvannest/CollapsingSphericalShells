@@ -1,3 +1,11 @@
+#Total Integration Time, dt, Output time
+
+230,.1,1
+
+------Do Not Remove This Line------
+
 #Shell Name,Mass (Msol),Initial Radius (AU),Initial Velocity (km/s)
-alpha,1.00,10.0,0.0
-#beta,1.000,2.2,0.00
+
+alpha,1,10.1,-0.001
+
+beta,1,9.9,0.001
