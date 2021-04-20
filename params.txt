@@ -8,6 +8,12 @@
 
 alpha,1,10,0
 
-#beta,2,3,1e3
+#alpha,3,3,2e4
 
-#gamma,3,4,0
+#beta,2,5,0
+
+#gamma,1,8,-1e2
+
+#delta,1.5,2,3e4
+
+#epsilon,3,10,0

@@ -31,8 +31,8 @@ for line in L:
 if i == 1:
     colors = ['k']
 else:
-    cm = plt.get_cmap('viridis_r')
-    colors = [cm(1*float(n)/float(i)) for n in np.arange(i)]
+    cm = plt.get_cmap('viridis')
+    colors = [cm(1.4*float(n)/float(i)) for n in np.arange(i)]
     
 
 f,ax=plt.subplots(2,1,gridspec_kw={'height_ratios':[3,1]},figsize=(8,6))
