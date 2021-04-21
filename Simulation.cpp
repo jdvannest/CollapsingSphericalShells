@@ -21,7 +21,7 @@ int main()
     //Fill the data arrays with initial values from params.txt
     //Shell 0 is the central point mass of 10Msol
     names[0] = "Central Mass";
-    mass[0] = 1;
+    mass[0] = 10;
     r[0] = m_to_AU(1);
     v[0] = 0;
     initialize_arrays(names,mass,r,v);

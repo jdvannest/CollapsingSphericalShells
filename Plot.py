@@ -50,7 +50,7 @@ else:
     colors = [cm(1.4*float(n)/float(i)) for n in np.arange(i)]
     
 imagename = fname.split('/')[-1].split('.')[0] if '/' in fname else fname.split('.')[0]
-#print(time[np.where(np.array(r[0])<1e-5)[0][0]])
+print(time[np.where(np.array(r[0])<1e-5)[0][0]])
 
 #Create plot of Radii vs time and Energy
 f,ax=plt.subplots(2,1,gridspec_kw={'height_ratios':[3,1]},figsize=(10,8))
