@@ -47,12 +47,13 @@ int main()
         myfile<<names[i]<<'\t'<<kg_to_Msol(mass[i])<<'\t'<<m_to_AU(r[i])<<'\t'<<v[i]<<'\t'<<a[i]<<'\t'<<energy<<'\t'<<0<<endl;}
 
     //Perform integrations and output data after "output_time" has passed
-    for(int t=0;t<total_time;t+=output_time){
+    double t_elapsed=0;
+    while(t_elapsed<total_time){
         evolve(output_time,dt,mass,r,v,a,&energy,num_shells);
-
+        t_elapsed+=output_time;
         //Update output file current integration data
         for(int i=0;i<num_shells;i++){
-            myfile<<names[i]<<'\t'<<kg_to_Msol(mass[i])<<'\t'<<m_to_AU(r[i])<<'\t'<<v[i]<<'\t'<<a[i]<<'\t'<<energy<<'\t'<<s_to_yr(t)<<endl;}
+            myfile<<names[i]<<'\t'<<kg_to_Msol(mass[i])<<'\t'<<m_to_AU(r[i])<<'\t'<<v[i]<<'\t'<<a[i]<<'\t'<<energy<<'\t'<<s_to_yr(t_elapsed)<<endl;}
         }   
 
     //Close the output file and successfully exit the code
