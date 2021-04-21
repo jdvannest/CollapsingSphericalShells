@@ -50,6 +50,7 @@ else:
     colors = [cm(1.4*float(n)/float(i)) for n in np.arange(i)]
     
 imagename = fname.split('/')[-1].split('.')[0] if '/' in fname else fname.split('.')[0]
+#print(time[np.where(np.array(r[0])<1e-5)[0][0]])
 
 #Create plot of Radii vs time and Energy
 f,ax=plt.subplots(2,1,gridspec_kw={'height_ratios':[3,1]},figsize=(10,8))
@@ -87,7 +88,7 @@ if args.gif:
             ax.add_patch(plt.Circle((0,0),r[n][t],facecolor='None',edgecolor=colors[n],
                         linewidth=(mass[n]/max(mass)*5),label=names[n]))
         ax.legend(loc='upper right',prop={'size':12})
-        f.savefig(f'tmp/{imagename}.{"%05d"%(t,)}.png',bbox_inches='tight',pad_inches=.1)
+        f.savefig(f'tmp/{imagename}.{"%010d"%(t,)}.png',bbox_inches='tight',pad_inches=.1)
         plt.close()
         t+=jump
 
