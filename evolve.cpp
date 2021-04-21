@@ -23,7 +23,7 @@ void initial_energy(const double* mass, const double* r, const double* v, double
     for(int i=0;i<num_shells;i+=1){
         *energy += .5*mass[i]*pow(v[i],2);
         for(int j=0;j<num_shells;j+=1){
-            if(r[j]<r[i]){
+            if(i!=j & r[j]<r[i]){
                 *energy += (-G*mass[i]*mass[j])/r[i];
             }
         }
@@ -59,11 +59,10 @@ void evolve(double time, double dt, const double* mass, double* r, double* v, do
         }
         //Calculate new system energy
         *energy=0;
-        bool bad = false;
         for(int i=0;i<num_shells;i+=1){
             *energy += .5*mass[i]*pow(v[i],2);
             for(int j=0;j<num_shells;j+=1){
-                if(r[j]<r[i]){
+                if(i!=j & r[j]<r[i]){
                     *energy += (-G*mass[i]*mass[j])/r[i];
                 }
             }
