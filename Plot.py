@@ -50,7 +50,20 @@ else:
     colors = [cm(1.4*float(n)/float(i)) for n in np.arange(i)]
     
 imagename = fname.split('/')[-1].split('.')[0] if '/' in fname else fname.split('.')[0]
-print(time[np.where(np.array(r[0])<1e-5)[0][0]])
+if(i<6):
+    for n in np.arange(i):
+        try:
+            print(f'Shell {names[n]} Collapsed in {time[np.where(np.array(r[n])<1e-5)[0][0]]} years')
+        except:
+            print(f'Shell {names[n]} Failed to Collapse...')
+else:
+    try:
+        coll_times=[]
+        for n in np.arange(i):
+            coll_times.append(time[np.where(np.array(r[n])<1e-5)[0][0]])
+        print(f'Full Collapse in {np.max(coll_times)} years')
+    except:
+        print('System Failed to Collapse...')
 
 #Create plot of Radii vs time and Energy
 f,ax=plt.subplots(2,1,gridspec_kw={'height_ratios':[3,1]},figsize=(10,8))
@@ -65,12 +78,13 @@ ax[0].set_ylabel('Radius [AU]',fontsize=15)
 ax[1].set_ylabel(r'E/E$_{0}$ [N]',fontsize=15)
 for n in np.arange(i):
     ax[0].plot(time,r[n],color=colors[n],label=names[n])
-ax[0].legend(loc='upper right',prop={'size':12})
+if i<6: ax[0].legend(loc='upper right',prop={'size':12})
 ax[1].plot(time,np.array(energy)/energy_i,c='k')
 f.savefig(f'Plots/{imagename}.png',bbox_inches='tight',pad_inches=.1)
 print(f"Images saved to Plots/{imagename}.png")
 
 if args.gif:
+    maxline=5 if i<6 else 2
     def myprint(string,clear=False):
         if clear:
             sys.stdout.write("\033[F")
@@ -86,8 +100,8 @@ if args.gif:
         ax.set_ylim([-np.amax(r)-1,np.amax(r)+1])
         for n in np.arange(i):
             ax.add_patch(plt.Circle((0,0),r[n][t],facecolor='None',edgecolor=colors[n],
-                        linewidth=(mass[n]/max(mass)*5),label=names[n]))
-        ax.legend(loc='upper right',prop={'size':12})
+                        linewidth=(mass[n]/max(mass)*maxline),label=names[n]))
+        if i<6: ax.legend(loc='upper right',prop={'size':12})
         f.savefig(f'tmp/{imagename}.{"%010d"%(t,)}.png',bbox_inches='tight',pad_inches=.1)
         plt.close()
         t+=jump
