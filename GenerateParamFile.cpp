@@ -16,14 +16,15 @@ int main()
     paramfile<<"------Do Not Remove This Line------"<<endl;
     paramfile<<endl;
     paramfile<<"#Total Integration Time (yr), dt (yr), Output time (yr)"<<endl;
+    paramfile<<"#*Recommended dt ~1e-7 or less*"<<endl;
     paramfile<<endl;
-    paramfile<<"3,1e-5,.001"<<endl;
+    paramfile<<"8,1e-7,1e-3"<<endl;
     paramfile<<endl;
     paramfile<<"------Do Not Remove This Line------"<<endl;
     paramfile<<endl;
     paramfile<<"#Shell Name,Mass (Msol),Initial Radius (AU),Initial Velocity (km/s)"<<endl;
     paramfile<<endl;
-    paramfile<<"alpha,1,5,0"<<endl;
+    paramfile<<"alpha,1,10,0"<<endl;
     paramfile.close();
     cout<<"Generated file 'params.txt'"<<endl;
     exit(0);
