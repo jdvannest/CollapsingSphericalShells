@@ -4,6 +4,8 @@ using namespace std;
 
 int main()
 {
+    time_t start,end;
+    time(&start);
     //Determine name out output file from params.txt
     string fname;
     file_name(&fname);
@@ -48,16 +50,34 @@ int main()
 
     //Perform integrations and output data after "output_time" has passed
     double t_elapsed=0;
+    float prog=0;
+    cout<<"0.00%";
     while(t_elapsed<total_time){
         evolve(output_time,dt,mass,r,v,a,&energy,num_shells);
         t_elapsed+=output_time;
         //Update output file current integration data
         for(int i=0;i<num_shells;i++){
             myfile<<names[i]<<'\t'<<kg_to_Msol(mass[i])<<'\t'<<m_to_AU(r[i])<<'\t'<<v[i]<<'\t'<<a[i]<<'\t'<<energy<<'\t'<<s_to_yr(t_elapsed)<<endl;}
+        prog = round_up(t_elapsed/total_time*100);
+        cout<<'\r'<<prog<<"%"<<flush;
         }   
 
     //Close the output file and successfully exit the code
     myfile.close();
-    cout<<"Done: Output written to outputs/"<<fname<<".txt"<<endl;
+    time(&end);
+    float runtime=difftime(end,start);
+    string t_unit;
+    if(runtime>3600){
+        runtime = round_up(runtime/3600);
+        t_unit = "hours";
+    }else if(runtime>60){
+        runtime = round_up(runtime/60);
+        t_unit = "minuts";
+    }else{
+        runtime = round_up(runtime);
+        t_unit="seconds";
+    }
+    cout<<'\r'<<"Simulation completed in "<<runtime<<" "<<t_unit<<endl;
+    cout<<"Output written to outputs/"<<fname<<".txt"<<endl;
     exit(0);
 }

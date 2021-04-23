@@ -2,6 +2,11 @@
 
 using namespace std;
 
+float round_up(float value)
+{
+    return(std::ceil(value * 100.0) / 100.0);
+}
+
 double yr_to_s(double years)
 {
     return(years*31556952);
