@@ -72,7 +72,7 @@ int main()
         t_unit = "hours";
     }else if(runtime>60){
         runtime = round_up(runtime/60);
-        t_unit = "minuts";
+        t_unit = "minutes";
     }else{
         runtime = round_up(runtime);
         t_unit="seconds";
