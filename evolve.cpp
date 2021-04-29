@@ -37,7 +37,6 @@ void evolve(double time, double dt, const double* mass, double* r, double* v, do
     while(t<time){
         //Calculate new radii for all shells
         #pragma omp parallel for private(i)
-        {
         for(int i=0;i<num_shells;i+=1){
             r[i] = r[i]+v[i]*dt+0.5*a[i]*pow(dt,2);
             if(r[i]<1){
@@ -46,12 +45,10 @@ void evolve(double time, double dt, const double* mass, double* r, double* v, do
                 a[i]=0;
             }
         }
-        }
         //Calculate new accelerations, velocities and system energy
         *energy=0;
         #pragma omp parallel for private(a_next,i) reduction(+: energy)
         //collapse(2) above? Maybe not because of the if(r[i]>1) condition
-        {
         for(int i=0;i<num_shells;i+=1){
             *energy += (-G*pow(mass[i],2))/(2*r[i]);
             *energy += .5*mass[i]*pow(v[i],2);
@@ -66,7 +63,6 @@ void evolve(double time, double dt, const double* mass, double* r, double* v, do
                 v[i] = v[i]+0.5*(a[i]+a_next)*dt;
                 a[i] = a_next;
             }
-        }
         }
         //Advance to next time step
         t+=dt;
