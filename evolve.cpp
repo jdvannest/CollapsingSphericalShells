@@ -45,26 +45,20 @@ void evolve(double time, double dt, const double* mass, double* r, double* v, do
             }
         }
         //Calculate new accelerations and velocities
+        *energy=0;
         for(int i=0;i<num_shells;i+=1){
+            *energy += .5*mass[i]*pow(v[i],2);
             if(r[i]>0){
                 //a_next = (-G*mass[i])/(2*pow(r[i],2));
                 a_next=0;
                 for(int j=0;j<num_shells;j+=1){
                     if(i!=j & r[j]<r[i]){
-                        a_next += (-G*mass[j])/(pow(r[i],2));}
+                        a_next += (-G*mass[j])/(pow(r[i],2));
+                        *energy += (-G*mass[i]*mass[j])/r[i];
+                    }
                 }
                 v[i] = v[i]+0.5*(a[i]+a_next)*dt;
                 a[i] = a_next;
-            }
-        }
-        //Calculate new system energy
-        *energy=0;
-        for(int i=0;i<num_shells;i+=1){
-            *energy += .5*mass[i]*pow(v[i],2);
-            for(int j=0;j<num_shells;j+=1){
-                if(i!=j & r[j]<r[i]){
-                    *energy += (-G*mass[i]*mass[j])/r[i];
-                }
             }
         }
         //Advance to next time step
