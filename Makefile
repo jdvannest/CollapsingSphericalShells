@@ -2,7 +2,7 @@
 #
 # Flags for optimization:
 #
-CC := g++
+CC := gcc
 CFLAGS := -g 
 FC := gfortran
 FFLAGS := -g
@@ -30,7 +30,7 @@ all: $(TARGETS)
 
 
 $(TARGET1):$(OBJ1) $(OBJ2) $(OBJ3) $(OBJ4)
-	$(CC) $(CFLAGS) $^ -o $@
+	$(CC) $(CFLAGS) $^ -o $@ -fopenmp
 
 $(TARGET2):$(OBJ11)
 	$(CC) $(CFLAGS) $^ -o $@
