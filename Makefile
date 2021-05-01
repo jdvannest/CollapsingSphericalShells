@@ -2,10 +2,10 @@
 #
 # Flags for optimization:
 #
-CC := g++ -fopenmp
-CFLAGS := -g 
-FC := gfortran -fopenmp
-FFLAGS := -g
+CC := g++
+CFLAGS := -g -fopenmp
+FC := gfortran
+FFLAGS := -g -fopenmp
 
 #LINKER FLAGS
 LFLAGS= -lstdc++ #-lgfortran
@@ -30,7 +30,7 @@ all: $(TARGETS)
 
 
 $(TARGET1):$(OBJ1) $(OBJ2) $(OBJ3) $(OBJ4)
-	$(CC) $(CFLAGS) $^ -o $@ -fopenmp -lpthread
+	$(CC) $(CFLAGS) $^ -o $@ -fopenmp
 
 $(TARGET2):$(OBJ11)
 	$(CC) $(CFLAGS) $^ -o $@

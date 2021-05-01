@@ -1,3 +1,4 @@
+#include <omp.h>
 #include <iostream>
 #include <fstream>
 #include <cstdlib> 
@@ -6,7 +7,6 @@
 #include <sstream>
 #include <string>
 #include <time.h>
-#include <omp.h>
 
 void file_name(std::string* fname);
 void count_shells(int* num_shells);

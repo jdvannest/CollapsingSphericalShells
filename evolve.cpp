@@ -51,6 +51,7 @@ void evolve(double time, double dt, const double* mass, double* r, double* v, do
         #pragma omp parallel for private(a_next,i) reduction(+: energy)
         //collapse(2) above? Maybe not because of the if(r[i]>1) condition
         for(i=0;i<num_shells;i+=1){
+            //cout<<OMP_GET_NUM_THREADS()<<endl;
             *energy += (-G*pow(mass[i],2))/(2*r[i]);
             *energy += .5*mass[i]*pow(v[i],2);
             if(r[i]>1){
