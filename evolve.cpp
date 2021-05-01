@@ -48,7 +48,7 @@ void evolve(double time, double dt, const double* mass, double* r, double* v, do
         }
         //Calculate new accelerations, velocities and system energy
         *energy=0;
-        #pragma omp parallel for private(a_next,i) reduction(+: energy)
+        #pragma omp parallel for private(a_next,i) shared(energy) reduction(+ : energy)
         //collapse(2) above? Maybe not because of the if(r[i]>1) condition
         for(i=0;i<num_shells;i+=1){
             //cout<<OMP_GET_NUM_THREADS()<<endl;
