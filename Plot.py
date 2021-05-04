@@ -69,9 +69,9 @@ else:
 f,ax=plt.subplots(2,1,gridspec_kw={'height_ratios':[3,1]},figsize=(10,8))
 plt.subplots_adjust(hspace=0)
 ax[0].tick_params(axis='x',length=0,labelsize=0)
-ax[0].set_ylim([0,np.amax(r)+1])
+ax[0].set_ylim([0,1.1*np.amax(r)])
 ax[0].set_xlim([0,max(time)])
-ax[1].set_ylim([0,2])
+#ax[1].set_ylim([0,2])
 ax[1].set_xlim([0,max(time)])
 ax[1].set_xlabel('Time [yrs]',fontsize=15)
 ax[0].set_ylabel('Radius [AU]',fontsize=15)
@@ -100,8 +100,8 @@ if args.gif:
         jump=int(len(time)/200)
     while(t<len(time)):
         f,ax=plt.subplots(1,1,figsize=(5,5))
-        ax.set_xlim([-np.amax(r)-1,np.amax(r)+1])
-        ax.set_ylim([-np.amax(r)-1,np.amax(r)+1])
+        ax.set_xlim([-1.1*np.amax(r),1.1*np.amax(r)])
+        ax.set_ylim([-1.1*np.amax(r),1.1*np.amax(r)])
         for n in np.arange(i):
             ax.add_patch(plt.Circle((0,0),r[n][t],facecolor='None',edgecolor=colors[n],
                         linewidth=(mass[n]/max(mass)*maxline),label=names[n]))
