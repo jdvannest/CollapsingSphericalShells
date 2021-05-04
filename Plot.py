@@ -93,7 +93,11 @@ if args.gif:
     print("Compiling gif...")
     #Create .gif of the shells
     os.system('mkdir tmp')
-    jump,t = [int(len(time)/200) , 0]
+    t = 0
+    if len(time)<200:
+        jump=1
+    else:
+        jump=int(len(time)/200)
     while(t<len(time)):
         f,ax=plt.subplots(1,1,figsize=(5,5))
         ax.set_xlim([-np.amax(r)-1,np.amax(r)+1])
