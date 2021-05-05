@@ -16,9 +16,9 @@ int main()
     paramfile<<"------Do Not Remove This Line------"<<endl;
     paramfile<<endl;
     paramfile<<"#Total Integration Time (yr), dt (yr), Output time (yr)"<<endl;
-    paramfile<<"#*Recommended dt ~1e-5 or less*"<<endl;
+    paramfile<<"#*Recommended dt ~1e-7 or less*"<<endl;
     paramfile<<endl;
-    paramfile<<"2,1e-5,.001"<<endl;
+    paramfile<<"2,1e-7,1e-3"<<endl;
     paramfile<<endl;
     paramfile<<"------Do Not Remove This Line------"<<endl;
     paramfile<<endl;

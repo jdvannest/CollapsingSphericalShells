@@ -31,7 +31,7 @@ r,time,energy = [[],[],[]]
 for n in np.arange(i):
     r.append([])
 
-energy_i = float(L[0].split('\t')[5])
+energy_i = float(L[i].split('\t')[5])
 for line in L:
     l = line.split('\t')
     index = names.index(l[0])
@@ -71,7 +71,7 @@ plt.subplots_adjust(hspace=0)
 ax[0].tick_params(axis='x',length=0,labelsize=0)
 ax[0].set_ylim([0,1.1*np.amax(r)])
 ax[0].set_xlim([0,max(time)])
-#ax[1].set_ylim([0,2])
+ax[1].set_ylim([0,2])
 ax[1].set_xlim([0,max(time)])
 ax[1].set_xlabel('Time [yrs]',fontsize=15)
 ax[0].set_ylabel('Radius [AU]',fontsize=15)
