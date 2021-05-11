@@ -1,25 +1,23 @@
-
 #
 # Flags for optimization:
 #
 CC := g++
 CFLAGS := -g 
-FC := gfortran
-FFLAGS := -g
+
 
 #LINKER FLAGS
-LFLAGS= -lstdc++ #-lgfortran
+LFLAGS= -lstdc++ 
 
 
 #Source files:
 
-OBJ1 := Simulation.o
-OBJ2 := read_params.o
-OBJ3 := evolve.o
-OBJ4 := conversions.o
+OBJ1 := build/Simulation.o
+OBJ2 := build/read_params.o
+OBJ3 := build/evolve.o
+OBJ4 := build/conversions.o
 TARGET1 := Simulation
 
-OBJ11 := GenerateParamFile.o
+OBJ11 := build/GenerateParamFile.o
 TARGET2 := GenerateParamFile
 
 
@@ -39,13 +37,12 @@ $(TARGET2):$(OBJ11)
 .PHONY: clean
 
 clean:
-	\rm -f *.o *.mod *.Data.* *.png *.gif *_*/*.png $(TARGETS) *.lst output.txt
+	\rm -f build/*.o *.mod *.Data.* *.png *.gif *_*/*.png $(TARGETS) *.lst output.txt
 
 #
 # here's how we translate the files:
 #
 
-%.o: %.cpp Makefile
+%.o: build/%.cpp Makefile
 	$(CC) $(CFLAGS) -c $<
-%.o: %.f90 Makefile
-	$(FC) $(FFLAGS) -c $< 
+

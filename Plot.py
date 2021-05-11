@@ -31,7 +31,7 @@ r,time,energy = [[],[],[]]
 for n in np.arange(i):
     r.append([])
 
-energy_i = float(L[i].split('\t')[5])
+energy_i = float(L[1].split('\t')[5])
 for line in L:
     l = line.split('\t')
     index = names.index(l[0])
