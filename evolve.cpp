@@ -52,8 +52,6 @@ void evolve(double time, double dt, const double* mass, double* r, double* v, do
         //collapse(2) above? Maybe not because of the if(r[i]>1) condition
         for(i=0;i<num_shells;i+=1){
             //cout<<omp_get_num_threads()<<" : "<<omp_get_thread_num()<<endl;
-            ensum += (-G*pow(mass[i],2))/(2*r[i]);
-            ensum += .5*mass[i]*pow(v[i],2);
             if(r[i]>1){
                 a_next = (-G*mass[i])/(2*pow(r[i],2));
                 for(int j=0;j<num_shells;j+=1){
@@ -64,6 +62,8 @@ void evolve(double time, double dt, const double* mass, double* r, double* v, do
                 }
                 v[i] = v[i]+0.5*(a[i]+a_next)*dt;
                 a[i] = a_next;
+                ensum += (-G*pow(mass[i],2))/(2*r[i]);
+                ensum += .5*mass[i]*pow(v[i],2);
             }
         }
         *energy=ensum;
